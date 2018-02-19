@@ -14,5 +14,5 @@ if [ -f $of ];then
 else
    mv $nf $of
 fi
-cat $of|grep "Tiny List Start" -A 2147483647|grep "General List End" -B 2147483647|grep -v "\!\!\-\-\-"|grep -v "###"|grep -v "\.\.\."|sed '1d;/^$/d;s/%2F/\//g;s/@//g;s/!--//g;s/|//g;s/^\.//g;s/\/$//g;s/htt\w\+:\/\///g;s/\/.\{0,\}//g'|sort -k2n|uniq>url.dat
-cat special.dat>>url.dat
+cat $of|grep "Tiny List Start" -A 2147483647|grep "General List End" -B 2147483647|sed '/Tiny List Start/r special.dat'|grep -v "\!\!\-\-\-"|grep -v "###"|grep -v "\.\.\."|sed '/^$/d;s/%2F/\//g;s/@//g;s/!--//g;s/|//g;s/^\.//g;s/\/$//g;s/htt\w\+:\/\///g;s/\/.\{0,\}//g'|sort -k2n|uniq>url.dat
+
